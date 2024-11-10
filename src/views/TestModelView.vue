@@ -1,5 +1,5 @@
 <template>
-      <basic-usage />
+      <basic-usage tiltle="模型訓練" content=""/>
 </template>
   
   <script setup lang="ts">

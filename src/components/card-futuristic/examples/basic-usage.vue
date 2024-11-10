@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col gap-10 border border-gray-300 p-6 pb-6">
-    <div class="h-full flex justify-left">
+    <div class=" h-full flex justify-left">
       <card-futuristic
         v-on-click-outside="() => toggleSelect(true)"
         :visible
@@ -10,11 +10,11 @@
       >
         <div class="flex flex-col gap-4">
           <div class="text-xl font-bold">
-            Title
+            {{ tiltle }}
           </div>
 
           <div>
-            The best things in life are actually really expensive.
+            {{ content }}
           </div>
         </div>
       </card-futuristic>
@@ -26,12 +26,15 @@
 import { vOnClickOutside } from '@vueuse/components'
 import { useToggle } from '@vueuse/core'
 import { ref } from 'vue'
-import BaseCheckbox from '../../base-checkbox.vue'
 import CardFuturistic from '../card-futuristic.vue'
 
 const visible = ref(true)
 
-const [selected, toggleSelect] = useToggle(false)
+const [selected, toggleSelect] = useToggle(true)
+defineProps<{
+  tiltle: string
+  content: string
+}>()
 </script>
 
 <style lang="sass">

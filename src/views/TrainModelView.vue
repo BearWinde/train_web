@@ -1,14 +1,14 @@
 <template>
     <div>
-      <h2 class="mb-4">Step 1: 數據集準備</h2>
-      <div class="row justify-content-between mb-4 p-0 m-0">
-        <div class="output-style border border-1 rounded p-4 text-center bg-light btn d-flex justify-content-center align-items-center">
-          <p>一鍵劃分數據集</p>
-        </div>
-        <div class="output-style border border-1 rounded p-4 d-flex flex-column">
-          <label for="output" class="mb-2">輸出信息</label>
-          <input type="text" id="output">
-        </div>
+      <basic-usage tiltle="Step 1: 數據集準備" content="Step 1: 数据集准备
+请将切片后的数据集放置在data/train/audio文件夹下，在数据集中按训练集：验证集=100:1的比例挑选验证集音频放置到data/val/audio文件夹中
+单说话人模型，直接将所有wav文件放置到对应的audio文件夹下即可。如果是训练多说话人模型，需要在训练集和验证集的audio文件夹下新建不同说话人的目录，只能以纯数字命名，以1开始
+如果你不想手动挑选验证集，在数据集放置到data/train/audio后也可以点击下面的一键划分数据集完成操作。
+验证集的条数最好不要超过10条，否则训练验证会变得很慢。验证集的音频质量越高越好。"/>
+
+      <div style="display: flex; align-items: center; justify-content: center;">
+      <Button style="margin: 10px;width: 50%; min-height: 100px; ">劃分資料集</Button>
+      <mixPartError v-bind:style="{ width: '50%'}" />
       </div>
       <div class="row justify-content-between mb-4 m-0">
         <div class="encoder-style border border-1 rounded p-4 d-flex flex-column">
@@ -150,11 +150,9 @@
     </div>
   </template>
   
-  <style lang="scss">
-  .output-style {
-    width: 49%;
-  }
-  .encoder-style {
-    width: 32.9%;
-  }
-  </style>
+<script setup lang="ts">
+import BasicUsage from '../components/card-futuristic/examples/basic-usage.vue'
+import { Button } from 'ant-design-vue';
+import mixPartError from '@/components/card-futuristic/examples/mix-part-error.vue';
+import { backgroundUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/backgroundUboDeclaration';
+</script>

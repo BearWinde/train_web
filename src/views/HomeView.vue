@@ -1,7 +1,7 @@
 
 <template>
   
-  <basic-usage/>
+  <basic-usage tiltle="模型訓練" content=""/>
   <!-- <div class="container mt-4">
     <router-link to="/inference" class="button-style p-2 text-decoration-none">推理</router-link>
     <router-link to="/training" class="button-style p-2 text-decoration-none">訓練</router-link>

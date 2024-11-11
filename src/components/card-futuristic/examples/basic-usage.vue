@@ -14,7 +14,7 @@
           </div>
 
           <div>
-            {{ content }}
+            <span style="white-space: pre-wrap;">{{ content }}</span>
           </div>
         </div>
       </card-futuristic>

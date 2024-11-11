@@ -1,7 +1,6 @@
 
 <template>
   
-  <basic-usage tiltle="模型訓練" content=""/>
   <!-- <div class="container mt-4">
     <router-link to="/inference" class="button-style p-2 text-decoration-none">推理</router-link>
     <router-link to="/training" class="button-style p-2 text-decoration-none">訓練</router-link>
@@ -11,7 +10,9 @@
   <div class="container pt-2">
     <router-view class="content-style"></router-view>
   </div> -->
-  <div class="container center">
+  <div class="container mt-4 ">
+    
+    <basic-usage tiltle="模型訓練" content=""/>
     <Tabs default-value="preview" class="relative mr-auto w-full">
       <div class="flex items-center justify-between pb-3">
         <TabsList class="w-full justify-start rounded-none border-b bg-transparent p-0">
@@ -37,10 +38,11 @@
       </div>
       <TabsContent value="train" class="relative rounded-md border">
         <TrainModelView></TrainModelView>
+       
       </TabsContent>
     </Tabs>
+    <br/>
   </div>
-
 </template>
   
 <script setup lang="ts">

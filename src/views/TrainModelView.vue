@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="margin: 10px;">
       <basic-usage tiltle="Step 1: 數據集準備" content="
 请将切片后的数据集放置在data/train/audio文件夹下，在数据集中按训练集：验证集=100:1的比例挑选验证集音频放置到data/val/audio文件夹中
 单说话人模型，直接将所有wav文件放置到对应的audio文件夹下即可。
@@ -17,16 +17,16 @@ f0算法：crepe: 抗噪能力较强但预处理速度慢 | parselmouth: 抗噪�
 注意，不同编码器训练出来的模型不通用，并且对应不同的配置文件，在推理时选择不匹配的配置文件会导致错误"/>
         <div style="display: flex; align-items: stretch; justify-content: stretch;" >
           <div class="encoder-style border border-1 rounded p-4" style="margin: 10px; width: 30%;">
-            <label class="font-orbitron">選擇編碼器 </label>
-            <Select id="selectEncoder">
+            <h2 class="font-orbitron">選擇編碼器 </h2>
+            <Select id="selectEncoder" style="width: 100%;">
               <option value="">請選擇</option>
               <option value="1">1</option>
               <option value="2">2</option>
             </Select>
           </div>
           <div class="encoder-style border border-1 rounded p-4" style="margin: 10px; width: 30%;">
-            <label class="font-orbitron">選擇f0提取算法</label>
-            <Select id="selectEncoder">
+            <h2 class="font-orbitron">選擇f0提取算法</h2>
+            <Select id="selectEncoder" style="width: 100%;">
               <option value="">請選擇</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -44,7 +44,7 @@ f0算法：crepe: 抗噪能力较强但预处理速度慢 | parselmouth: 抗噪�
 DSP的完整推理过程需要训练2个模型，分别是DDSP模型和扩散模型。因此你需要在下面设置2份配置文件的超参数。"/>
       <div style="align-items: stretch; justify-content: stretch;" >
         <div class="encoder-style border border-1 rounded p-4 " style=" width: 100%;">
-            <label class="font-orbitron" style="display:flex; ">DDSP模型配置 </label>
+            <label class="font-orbitron font-bold " style="font-size: 20px;display:flex; ">DDSP模型配置 </label>
             <div style="display: flex; align-items: stretch; justify-content: stretch; ">
               <div class="encoder-style border border-1 rounded p-4 " style="margin: 10px; width: 30%;">
                 <h2 class="font-orbitron">num_workers, 如果你的电脑配置较高，可以将这里设置为0加快训练速度 </h2>
@@ -103,7 +103,7 @@ DSP的完整推理过程需要训练2个模型，分别是DDSP模型和扩散模
       </div>
       <div style="align-items: stretch; justify-content: stretch;" >
         <div class="encoder-style border border-1 rounded p-4 " style=" width: 100%;">
-            <label class="font-orbitron" style="display:flex; ">擴散模型配置 </label>
+            <label class="font-orbitron font-bold " style="font-size: 20px;display:flex; ">擴散模型配置 </label>
             <div style="display: flex; align-items: stretch; justify-content: stretch; ">
               <div class="encoder-style border border-1 rounded p-4 " style=" width: 25%;">
                 <h2 class="font-orbitron">num_workers, 如果你的电脑配置较高，可以将这里设置为0加快训练速度 </h2>
@@ -168,112 +168,42 @@ DSP的完整推理过程需要训练2个模型，分别是DDSP模型和扩散模
             </div>
         </div>
       </div>
-        <i class="bi bi-caret-down-fill fs-2"></i>
-      <div class="mb-4 border border-1" id="DDSP-model-configuration">
-        <div class="row m-0 p-4">
-          <div class="col-4">
-            <label for="num-workers" class="mb-2">num-workers，如果你的電腦配置較高，可以將這裡設置為0加快訓練速度</label>
-            <input type="number" id="num-workers" value="2">
-          </div>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <input type="checkbox" id="check-workers" value="2" class="me-2" checked>
-            <label for="selected-processor">是否緩存數據，啟用後可以加快訓練速度，關閉後可以節省顯存或內存，但會減慢訓練速度</label>
-          </div>
-          <div class="col-4">
-            <label for="selected-processor" class="mb-2">若啟用緩存數據，使用顯存(cuda)還是內存(cpu)緩存，如果顯卡顯存充足，選擇cuda以加快訓練速度</label>
-            <label class="me-4">
-              <input type="radio" name="processor" value="gpu" id="selected-processor" class="me-2" checked />GPU
-            </label>
-            <label>
-                <input type="radio" name="processor" value="cpu" class="me-2" />CPU
-            </label>
-          </div>
-        </div>
-        <div class="row m-0 p-4 mb-4">
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">批量大小(batch_size)，根據顯卡顯存設置，小顯存適當降低該項，6G顯存可以設定為48，但該數值不要超過數據集總大小的1/4</label>
-            <input type="number" id="num-workers" value="48">
-          </div>
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">學習率（一般需要動）</label>
-            <input type="number" id="num-workers" value="0.0005">
-          </div>
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">每隔多少步驟(steps)產生一次評估日誌</label>
-            <input type="number" id="num-workers" value="10">
-          </div>
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">每隔多少步(steps)驗證並保存一次模型，如果你的批量大小增大，可以適當減少這裡的數字，但不建議設置為1000以下</label>
-            <input type="number" id="num-workers" value="2000">
-          </div>
-        </div>
-      </div>
       <div style="display: flex; align-items: center; justify-content: center;">
         <mixPartError v-bind:style="{ width: '50%'}" />
         <Button class= "text-xl font-bold" style="margin: 10px;width: 50%; min-height: 100px; ">寫入配置文件</Button>
       </div>
-      <button class="btn w-100 d-flex justify-content-between align-items-center border border-1" data-bs-toggle="collapse" 
-      href="#DDSP-model-configuration" role="button" 
-      aria-expanded="false" aria-controls="DDSP-model-configuration">
-        <p>擴散模型配置</p>
-        <i class="bi bi-caret-down-fill fs-2"></i>
-      </button>
-      <div class="mb-4 border border-1" id="DDSP-model-configuration">
-        <div class="row m-0 p-4">
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">num_workers，如果你的電腦配置了上述訓練，可以將這裡設定為0加速速度</label>
-            <input type="number" id="num-workers" value="2">
-          </div>
-          <div class="col-3 d-flex justify-content-center align-items-center">
-            <input type="checkbox" id="check-workers" value="2" class="me-2" checked>
-            <label for="selected-processor">是否緩存數據，啟用後可以加快訓練速度，關閉後可以節省顯存或內存，但會減慢訓練速度</label>
-          </div>
-          <div class="col-3">
-            <label for="selected-processor" class="mb-2">是否有儲存數據，啟用後可以加快訓練速度，關閉後可以節省顯著的儲存速度或內存，但會減慢訓練速度</label>
-            <label class="me-4">
-              <input type="radio" name="processor" value="gpu" id="selected-processor" class="me-2" checked />GPU
-            </label>
-            <label>
-                <input type="radio" name="processor" value="cpu" class="me-2" />CPU
-            </label>
-          </div>
-          <div class="col-3">
-            <label for="selected-processor" class="mb-2">是否有儲存數據，啟用後可以加快訓練速度，關閉後可以節省顯著的儲存速度或內存，但會減慢訓練速度</label>
-            <label class="me-4">
-              <input type="radio" name="processor" value="gpu" id="selected-processor" class="me-2" checked />GPU
-            </label>
-            <label>
-                <input type="radio" name="processor" value="cpu" class="me-2" />CPU
-            </label>
-          </div>
-        </div>
-        <div class="row m-0 p-4 mb-4">
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">批量大小(batch_size)，根據顯卡顯存設置，小顯存適當降低該項，6G顯存可以設定為48，但該數值不要超過數據集總大小的1/4</label>
-            <input type="number" id="num-workers" value="48">
-          </div>
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">學習率（一般需要動）</label>
-            <input type="number" id="num-workers" value="0.0005">
-          </div>
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">每隔多少步驟(steps)產生一次評估日誌</label>
-            <input type="number" id="num-workers" value="10">
-          </div>
-          <div class="col-3">
-            <label for="num-workers" class="mb-2">每隔多少步(steps)驗證並保存一次模型，如果你的批量大小增大，可以適當減少這裡的數字，但不建議設置為1000以下</label>
-            <input type="number" id="num-workers" value="2000">
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-between mb-4 p-0 m-0">
-        <div class="output-style border border-1 rounded p-4 d-flex flex-column">
-          <label for="output-message" class="mb-2">輸出訊息</label>
-          <input type="text" id="output-message">
-        </div>
-        <div class="output-style border border-1 rounded p-4 text-center bg-warning btn d-flex justify-content-center align-items-center">
-          <p>寫入設定檔</p>
-        </div>
+      <basic-usage tiltle="Step 4: 开始训练" content="D3SP的完整推理过程需要训练2个模型。
+首先选择训练进度，从头开始训练将会将exp文件夹中的对应模型进度保存备份至models_backup文件夹，如果是训练扩散模型，会自动装载对应编码器的预训练底模。
+两个模型的训练是独立的，你可以以任意顺序训练两个模型。训练前请先在上方选择预处理对应的编码器。"/>
+
+      <div class="encoder-style border border-1 rounded p-4 " style=" width: 100%;">
+            <div style="display: flex; align-items: stretch; justify-content: stretch;  ">
+              <div class="encoder-style border border-1 rounded p-4" style="width: 100%;" >
+                <h2 class="font-orbitron">你的当前训练进度 </h2>
+                <RadioGroup value="cuda">
+                  <Radio class="encoder-style border border-1 rounded p-2 font-orbitron" value="cuda">從頭開始訓練</Radio>
+                  <Radio class="encoder-style border border-1 rounded p-2 font-orbitron" value="cpu">繼續上次訓練進度</Radio> 
+                </RadioGroup>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <Button class= "text-xl font-bold" style="margin: 10px;width: 50%; min-height: 50px; ">寫入配置文件</Button>
+              <Button class= "text-xl font-bold" style="margin: 10px;width: 50%; min-height: 50px; ">寫入配置文件</Button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <mixPartError v-bind:style="{ margin: '10px',width: '50%'}" />
+              <mixPartError v-bind:style="{ margin: '10px',width: '50%'}" />
+            </div>
+            <div style="display: flex; align-items: stretch; justify-content: stretch;  ">
+              <div class="encoder-style border border-1 rounded p-4" style="width: 100%;" >
+                <h2 class="font-orbitron">启动Tensorboard前，请选择当前正在训练的模型 </h2>
+                <RadioGroup value="cuda">
+                  <Radio class="encoder-style border border-1 rounded p-2 font-orbitron" value="cuda">DDSP</Radio>
+                  <Radio class="encoder-style border border-1 rounded p-2 font-orbitron" value="cpu">擴散模型</Radio> 
+                </RadioGroup>
+              </div>
+            </div>
+            <Button class= "text-xl font-bold" style="width: 100%; min-height: 50px; ">打開tensorboard</Button>
       </div>
     </div>
   </template>
@@ -281,8 +211,5 @@ DSP的完整推理过程需要训练2个模型，分别是DDSP模型和扩散模
 <script setup lang="ts">
 import BasicUsage from '../components/card-futuristic/examples/basic-usage.vue'
 import { Button,Select,Checkbox,Radio,RadioGroup} from 'ant-design-vue';
-// import Checkbox from '@/components/ui/checkbox/Checkbox.vue';
-import { ref } from 'vue';
 import mixPartError from '@/components/card-futuristic/examples/mix-part-error.vue';
-const value = ref('cuda');
 </script>

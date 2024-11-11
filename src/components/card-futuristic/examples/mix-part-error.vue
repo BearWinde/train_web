@@ -49,9 +49,9 @@ type CardProp = Writable<ExtractComponentProps<typeof CardFuturistic>> & {
 const list = ref(pipe(
   [
     {
-      title: 'ERROR 錯誤訊息',
+      title: 'Ouput data 輸出訊息',
       titleClass: 'text-2xl font-bold text-[#ba2507] ',
-      text: 'FISH OVERWEIGHT',
+      text: '',
       textClass: 'text-[#ba2507]',
       corner: null,
       bg: {

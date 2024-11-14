@@ -101,6 +101,5 @@ DSP的完整推理过程需要训练2个模型，分别是DDSP模型和扩散模
 <script setup lang="ts">
 import { InboxOutlined } from '@ant-design/icons-vue';
 import BasicUsage from '../components/card-futuristic/examples/basic-usage.vue'
-import { Button,Select,UploadDragger,Radio,RadioGroup} from 'ant-design-vue';
-import mixPartError from '@/components/card-futuristic/examples/mix-part-error.vue';
+import { Button,Select,UploadDragger} from 'ant-design-vue';
 </script>
